@@ -2,4 +2,5 @@
 
 - ArrayList
 - StringBuilder
+- HashTable
 - ...
