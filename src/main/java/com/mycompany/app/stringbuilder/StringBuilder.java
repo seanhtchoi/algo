@@ -4,52 +4,53 @@ public class StringBuilder {
     private static final int BUFFER_MULTIPLIER = 2;
     private static final int DEFAULT_BUFFER_SIZE = 16;
 
-    private char[] str;
-    private int size;
+    public char[] str;
+    public int size;
 
-    private int charCount;
+    public int charCount;
 
     public StringBuilder() {
         this.size = DEFAULT_BUFFER_SIZE;
-        str = new char[this.size];
-        charCount = 0;
+        this.str = new char[this.size];
+        this.charCount = 0;
     }
 
     public StringBuilder(int size) {
         this.size = size;
         this.str = new char[size];
-        charCount = 0;
+        this.charCount = 0;
     }
 
     public StringBuilder(char[] str) {
-        this.size = str.length;
-        this.str = str;
-        charCount = this.size;
+        this();
+        append(str);
     }
 
     public StringBuilder(String str) {
-        this.size = str.length();
-        this.str = str.toCharArray();
-        charCount = this.size;
+        this();
+        append(str);
     }
 
     public StringBuilder append(Object item) {
-
-        return null;
+        char[] newStr = item.toString().toCharArray();
+        return processAppend(newStr);
     }
 
     public StringBuilder append(String str) {
-        return null;
+        char[] newStr = str.toCharArray();
+        return processAppend(newStr);
     }
 
     public StringBuilder append(char[] str) {
-        while (resizeRequired(str)) {
-            resizeBuffer(str);
-        }
-        // System.arraycopy(src, srcPos, dest, destPos, length);
-        System.arraycopy(str, 0, this.str, charCount, str.length);
-        updateCount(str.length);
+        return processAppend(str);
+    }
 
+    private StringBuilder processAppend(char[] newStr) {
+        while (resizeRequired(newStr)) {
+            resizeBuffer();
+        }
+        addString(newStr);
+        updateCount(newStr.length);
         return this;
     }
 
@@ -58,19 +59,12 @@ public class StringBuilder {
         return String.valueOf(str);
     }
 
-    private void resizeBuffer(String newInput) {
-
-    }
-
-    private void resizeBuffer(char[] newInput) {
+    private void resizeBuffer() {
         this.size *= BUFFER_MULTIPLIER;
         char[] newStr = new char[this.size];
+        System.out.println(this.charCount);
         System.arraycopy(this.str, 0, newStr, 0, this.charCount);
         this.str = newStr;
-    }
-
-    private boolean resizeRequired(String newInput) {
-        return false;
     }
 
     private boolean resizeRequired(char[] newInput) {
@@ -80,12 +74,9 @@ public class StringBuilder {
         return false;
     }
 
-    private void addString(String str) {
-
-    }
-
     private void addString(char[] str) {
-
+        // System.arraycopy(src, srcPos, dest, destPos, length);
+        System.arraycopy(str, 0, this.str, this.charCount, str.length);
     }
 
     private void updateCount(int charCount) {
@@ -93,12 +84,12 @@ public class StringBuilder {
     }
 
     public static void main(String[] args) {
-        StringBuilder str = new StringBuilder(10);
-        str.append("helloworld".toCharArray());
-        str.append("helloworld".toCharArray());
-        str.append("helloworld".toCharArray());
+        StringBuilder str = new StringBuilder("helllloooooo");
+        str.append("hellold".toCharArray());
+        str.append("heoworld");
+        str.append("helloworld");
         str.append("hey you".toCharArray());
-        str.append("have a good day".toCharArray());
+        str.append(new Integer(11111));
         System.out.println(str);
     }
 

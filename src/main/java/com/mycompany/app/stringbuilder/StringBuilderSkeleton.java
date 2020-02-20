@@ -42,24 +42,12 @@ public class StringBuilderSkeleton {
         return null;
     }
 
-    private void resizeBuffer(String newInput) {
+    private void resizeBuffer() {
 
-    }
-
-    private void resizeBuffer(char[] newInput) {
-
-    }
-
-    private boolean resizeRequired(String newInput) {
-        return false;
     }
 
     private boolean resizeRequired(char[] newInput) {
         return false;
-    }
-
-    private void addString(String str) {
-
     }
 
     private void addString(char[] str) {
