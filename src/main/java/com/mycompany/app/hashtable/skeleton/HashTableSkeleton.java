@@ -1,4 +1,4 @@
-package com.mycompany.app.hashtable;
+package com.mycompany.app.hashtable.skeleton;
 
 import java.util.ArrayList;
 
